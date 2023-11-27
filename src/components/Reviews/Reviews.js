@@ -1,4 +1,4 @@
-import { getMovieReviews } from "api";
+import { getMovieAbout } from "api";
 import { Loader } from "components/Loader";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -16,8 +16,8 @@ export default function Reviews() {
         try {
           setIsLoading(true);
           setError(false);
-          const data = await getMovieReviews(movieId);
-          setReviews(data);
+          const data = await getMovieAbout(movieId, 'reviews');
+          setReviews(data.results);
         } catch (error) {
             setError(true);
             toast.error('Please, try to reload this page');
@@ -31,10 +31,15 @@ export default function Reviews() {
     return (
       <div>
         {isLoading && <Loader />}
-        {reviews && reviews.length === 0 && <p>There are no reviews</p>}
+        {reviews && reviews.length === 0 && (
+          <p>
+            <b>There are no reviews</b>
+          </p>
+        )}
         {reviews && (
           <ul>
-            {!error && reviews.map(({ author, id, content }) => (
+            {!error &&
+              reviews.map(({ author, id, content }) => (
                 <li key={id}>
                   <h2>{author}</h2>
                   <p>{content}</p>

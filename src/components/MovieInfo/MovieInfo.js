@@ -2,7 +2,7 @@ import { getYear, parse } from 'date-fns';
 import { InfoWrapper, Wrapper } from './MovieInfo.styled';
 
 const defaultImg =
-  '<https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700>';
+  'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
 export const MovieInfo = ({ data }) => {
   const { poster_path, title, vote_average, overview, genres, release_date } =

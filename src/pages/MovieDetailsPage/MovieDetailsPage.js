@@ -3,7 +3,8 @@ import { Loader } from "components/Loader";
 import { MovieInfo } from "components/MovieInfo/MovieInfo";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { Link, NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
+import { BackButton, Details } from "./MovieDetailsPage.styled";
 
 export default function MovieDetailsPage() {
     const [details, setDetails] = useState(null);
@@ -38,17 +39,17 @@ export default function MovieDetailsPage() {
         {isLoading && <Loader />}
         {details && (
           <div>
-            <Link to={backLinkRef.current.state?.from ?? '/'}>Go back</Link>
+            <BackButton to={backLinkRef.current.state?.from ?? '/'}>Go back</BackButton>
             <MovieInfo data={details} />
           </div>
         )}
         {!isLoading && !error && (
           <ul>
             <li>
-              <NavLink to="cast">Cast</NavLink>
+              <Details to="cast">Cast</Details>
             </li>
             <li>
-              <NavLink to="reviews">Reviews</NavLink>
+              <Details to="reviews">Reviews</Details>
             </li>
           </ul>
         )}
