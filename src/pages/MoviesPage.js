@@ -36,29 +36,13 @@ export default function MoviesPage() {
     findMovie();
   }, [queryToSearch]);
 
-  const handleSearch = async input => {
-    try {
-      setMovies([]);
-      setIsLoading(true);
-      setError(false);
-      const movies = await findMoviesByInput(input);
-      setMovies(movies);
-      updateSearchParam(input);
-    } catch (error) {
-      setError(true);
-      toast.error('Please, try to reload this page');
-    } finally {
-      setIsLoading(false);
-    }
+  const handleSearch = input => {
+    updateSearchParam(input);
   };
 
   return (
     <>
-      <Searchbar
-        onSubmit={handleSearch}
-        onChange={updateSearchParam}
-        query={queryToSearch}
-      />
+      <Searchbar onSubmit={handleSearch} />
       {isLoading && <Loader />}
       {movies.length > 0 && !error && <PopularMovies data={movies} />}
     </>
